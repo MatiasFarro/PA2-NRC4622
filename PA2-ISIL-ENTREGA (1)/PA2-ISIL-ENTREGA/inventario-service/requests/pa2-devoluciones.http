@@ -1,0 +1,27 @@
+### Consultar catálogo y elegir un código válido
+GET http://localhost:8082/inventario-service/api/inventario/productos
+Accept: application/json
+
+### Caso 5a: devolución válida (ajusta el código al catálogo existente)
+POST http://localhost:8082/inventario-service/api/inventario/productos/codigo/LAP-001/devoluciones
+Content-Type: application/json
+
+{"cantidad": 2}
+
+### Caso 5b: cantidad cero (esperado: 400; el stock no cambia)
+POST http://localhost:8082/inventario-service/api/inventario/productos/codigo/LAP-001/devoluciones
+Content-Type: application/json
+
+{"cantidad": 0}
+
+### Caso 5c: cantidad negativa (esperado: 400; el stock no cambia)
+POST http://localhost:8082/inventario-service/api/inventario/productos/codigo/LAP-001/devoluciones
+Content-Type: application/json
+
+{"cantidad": -2}
+
+### Caso 5d: código inexistente (esperado: 404)
+POST http://localhost:8082/inventario-service/api/inventario/productos/codigo/NO-EXISTE/devoluciones
+Content-Type: application/json
+
+{"cantidad": 2}

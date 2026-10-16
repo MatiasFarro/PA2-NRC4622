@@ -1,0 +1,11 @@
+CAPTURAS REALES PENDIENTES
+
+Guardar aquí capturas tomadas durante la ejecución real:
+1. Anulación correcta: stock antes/después, respuesta POST, auditoría y estado ANULADO.
+2. Anulación duplicada: HTTP 409 y sin devolución adicional.
+3. Pedido inexistente: HTTP 404.
+4. Inventario detenido: HTTP 503, pedido REGISTRADO y sin auditoría.
+5. API de devolución: cantidad válida (200) y cantidad inválida (400).
+6. Salida de mvn test en inventario-service.
+7. Salida de mvn test en sistema-pedidos-springboot.
+No se incluyen capturas falsas; las pruebas deben ejecutarse en el entorno local.

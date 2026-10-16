@@ -1,0 +1,32 @@
+### Ver pedidos existentes (obtener un ID real desde la interfaz /pedidos o H2)
+GET http://localhost:8081/sistema-pedidos/api/v1/orders
+Accept: application/json
+
+### Caso 1: anulación correcta; reemplazar pedidoId por un pedido REGISTRADO real
+POST http://localhost:8081/sistema-pedidos/api/v1/anulaciones
+Content-Type: application/json
+
+{"pedidoId": 1, "motivo": "Solicitud del cliente"}
+
+### Caso 2: repetir el mismo pedidoId (esperado: 409; no debe devolver stock otra vez)
+POST http://localhost:8081/sistema-pedidos/api/v1/anulaciones
+Content-Type: application/json
+
+{"pedidoId": 1, "motivo": "Prueba duplicada"}
+
+### Caso 3: pedido inexistente (usar un ID que no exista; esperado: 404)
+POST http://localhost:8081/sistema-pedidos/api/v1/anulaciones
+Content-Type: application/json
+
+{"pedidoId": 999999, "motivo": "Prueba de inexistente"}
+
+### Consultar auditoría de anulaciones
+GET http://localhost:8081/sistema-pedidos/api/v1/anulaciones
+Accept: application/json
+
+### Caso 4: detener WildFly/inventario-service y probar con un pedido registrado
+### Esperado: 503; el pedido permanece REGISTRADO y no se crea la auditoría.
+POST http://localhost:8081/sistema-pedidos/api/v1/anulaciones
+Content-Type: application/json
+
+{"pedidoId": 2, "motivo": "Prueba de inventario no disponible"}
